@@ -47,15 +47,18 @@
 </div>
 <script type="application/javascript">
     const audioElement = document.createElement("audio");
+    const randomNumber = Math.floor(Math.random() * 8);
+    const fileName = `ezclap${randomNumber}.mp3`;
+    audioElement.src = fileName;
     audioElement.type = "audio/mpeg";
     audioElement.id = "audio";
     const mount = document.getElementById("mount");
     mount.appendChild(audioElement);
     window.addEventListener("click", () => {
-        const randomNumber = Math.floor(Math.random() * 8);
-        const fileName = `ezclap${randomNumber}.mp3`;
+        const newRandomNumber = Math.floor(Math.random() * 8);
+        const newFileName = `ezclap${newRandomNumber}.mp3`;
         const audio = document.getElementById("audio");
-        audio.src = fileName;
+        audio.src = newFileName;
         audio.play();
     })
 </script>
