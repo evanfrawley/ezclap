@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ezclap</title>
+    <style>
+        .container {
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        h1 {
+            font-size: 64px;
+            text-align: center;
+            font-family: Roboto, sans-serif;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>ezclap!</h1>
+    <div id="mount"></div>
+</div>
+<script type="application/javascript">
+    const audioElement = document.createElement("audio");
+    const randomNumber = Math.floor(Math.random() * 8);
+    const fileName = `ezclap${randomNumber}.mp3`;
+    audioElement.type = "audio/mpeg";
+    audioElement.src = fileName;
+    audioElement.autoplay = true;
+    const mount = document.getElementById("mount");
+    mount.appendChild(audioElement);
+</script>
+</body>
+</html>
