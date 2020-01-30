@@ -13,11 +13,17 @@
             height: 100vh;
             width: 100vw;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
         }
 
+        .container:hover {
+            cursor: pointer;
+        }
+
         h1 {
+            margin: 0;
             font-size: 64px;
             text-align: center;
             font-family: Roboto, sans-serif;
@@ -27,17 +33,22 @@
 <body>
 <div class="container">
     <h1>ezclap!</h1>
+    <p>(click me)</p>
     <div id="mount"></div>
 </div>
 <script type="application/javascript">
     const audioElement = document.createElement("audio");
-    const randomNumber = Math.floor(Math.random() * 8);
-    const fileName = `ezclap${randomNumber}.mp3`;
     audioElement.type = "audio/mpeg";
-    audioElement.src = fileName;
-    audioElement.autoplay = true;
+    audioElement.id = "audio";
     const mount = document.getElementById("mount");
     mount.appendChild(audioElement);
+    window.addEventListener("click", () => {
+        const randomNumber = Math.floor(Math.random() * 8);
+        const fileName = `ezclap${randomNumber}.mp3`;
+        const audio = document.getElementById("audio");
+        audio.src = fileName;
+        audio.play();
+    })
 </script>
 </body>
 </html>
