@@ -4,20 +4,23 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-157376682-1"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+        function gtag() {
+            dataLayer.push(arguments);
+        }
         gtag('js', new Date());
-
         gtag('config', 'UA-157376682-1');
     </script>
     <link rel="icon" href="clap.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="you just got ezclap'd">
     <title>ezclap</title>
     <style>
         body {
             margin: 0;
         }
+
         .container {
             height: 100vh;
             width: 100vw;
@@ -25,6 +28,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            position: relative;
         }
 
         .container:hover {
@@ -35,15 +39,80 @@
             margin: 0;
             font-size: 64px;
             text-align: center;
+        }
+
+        h1, p, span {
             font-family: Roboto, sans-serif;
+        }
+
+        #toggle {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            transition: background-color 200ms ease-in-out;
+            padding: 4px 10px;
+            border-radius: 8px;
+        }
+
+        #sun, #moon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #toggle:hover.dark {
+            background-color: #3d3848;
+        }
+
+        #toggle:hover.light {
+            background-color: #f1f0f3;
+        }
+
+        #toggle:hover {
+            cursor: pointer;
+        }
+
+        .emoji {
+            margin-right: 4px;
+        }
+
+        /* dark theme */
+        h1.dark, p.dark, span.dark {
+            color: rgba(255, 255, 255, 0.87);
+        }
+
+        /* light theme */
+        h1.light, p.light, span.light {
+            color: rgba(0, 0, 0, 0.87);
+        }
+
+        .container.light,body.light {
+            background-color: white;
+        }
+
+        /* dark theme */
+        .container.dark,body.dark {
+            background-color: #232029;
+        }
+
+        #toggle.dark > #moon {
+            display: none;
+        }
+
+        #toggle.light > #sun {
+            display: none;
         }
     </style>
 </head>
-<body>
-<div class="container">
-    <h1>ezclap!</h1>
-    <p>(click me)</p>
+<body class="can-toggle dark">
+<div class="container dark can-toggle">
+    <h1 class="dark can-toggle">ezclap!</h1>
+    <p class="dark can-toggle">(click me)</p>
     <div id="mount"></div>
+    <div id="toggle" class="dark can-toggle">
+        <div id="moon"><span class="emoji">🌙</span><span class="can-toggle dark">Toggle Dark Mode</span></div>
+        <div id="sun"><span class="emoji">☀️</span>️<span class="can-toggle dark">Toggle Light Mode</span></div>
+    </div>
 </div>
 <script type="application/javascript">
     const audioElement = document.createElement("audio");
@@ -60,7 +129,19 @@
         const audio = document.getElementById("audio");
         audio.src = newFileName;
         audio.play();
-    })
+    });
+
+    const toggle = document.getElementById("toggle");
+    toggle.addEventListener("click", e => {
+        e.stopPropagation();
+        e.preventDefault();
+        const elements = Array.from(document.getElementsByClassName("can-toggle"));
+        elements.forEach(ele => {
+            console.log(ele.classList);
+            ele.classList.toggle("dark");
+            ele.classList.toggle("light");
+        })
+    });
 </script>
 </body>
 </html>
