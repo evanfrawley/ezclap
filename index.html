@@ -137,20 +137,26 @@
     audioElement.id = "audio";
     const mount = document.getElementById("mount");
     mount.appendChild(audioElement);
-    window.addEventListener("mousedown", () => {
+    const mountHandler = () => {
         const newRandomNumber = Math.floor(Math.random() * 8);
         const newFileName = `ezclap${newRandomNumber}.mp3`;
         const audio = document.getElementById("audio");
         audio.src = newFileName;
         audio.play();
-    });
+    };
+    window.addEventListener("click", mountHandler);
+    window.addEventListener("touchstart", mountHandler);
 
     const coffee = document.getElementById("coffee");
-    coffee.addEventListener("mousedown", e => {
+    const coffeeHandler = e => {
         e.stopPropagation();
-    });
+    };
+
+    coffee.addEventListener("click", coffeeHandler);
+    coffee.addEventListener("touchstart", coffeeHandler);
+
     const toggle = document.getElementById("toggle");
-    toggle.addEventListener("mousedown", e => {
+    const darkModeToggle = e => {
         e.stopPropagation();
         e.preventDefault();
         const elements = Array.from(document.getElementsByClassName("can-toggle"));
@@ -159,7 +165,9 @@
             ele.classList.toggle("dark");
             ele.classList.toggle("light");
         })
-    });
+    };
+    toggle.addEventListener("click", darkModeToggle);
+    toggle.addEventListener("touchstart", darkModeToggle);
 </script>
 </body>
 </html>
