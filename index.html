@@ -41,7 +41,7 @@
             text-align: center;
         }
 
-        h1, p, span {
+        h1, p, span, a {
             font-family: Roboto, sans-serif;
         }
 
@@ -76,14 +76,27 @@
             margin-right: 4px;
         }
 
+        #coffee {
+            position: absolute;
+            bottom: 20px;
+        }
+
         /* dark theme */
-        h1.dark, p.dark, span.dark {
+        h1.dark, p.dark, span.dark, a.dark {
             color: rgba(255, 255, 255, 0.87);
         }
 
         /* light theme */
-        h1.light, p.light, span.light {
+        h1.light, p.light, span.light, a.light {
             color: rgba(0, 0, 0, 0.87);
+        }
+
+        .light.muted {
+            color: rgba(0, 0, 0, 0.4);
+        }
+
+        .dark.muted {
+            color: rgba(255, 255, 255, 0.4);
         }
 
         .container.light,body.light {
@@ -113,6 +126,7 @@
         <div id="moon"><span class="emoji">🌙</span><span class="can-toggle dark">Toggle Dark Mode</span></div>
         <div id="sun"><span class="emoji">☀️</span>️<span class="can-toggle dark">Toggle Light Mode</span></div>
     </div>
+    <a id="coffee" target="_blank" class="can-toggle dark muted" href="https://www.buymeacoffee.com/evanf">Buy me a coffee</a>
 </div>
 <script type="application/javascript">
     const audioElement = document.createElement("audio");
@@ -123,7 +137,7 @@
     audioElement.id = "audio";
     const mount = document.getElementById("mount");
     mount.appendChild(audioElement);
-    window.addEventListener("click", () => {
+    window.addEventListener("mousedown", () => {
         const newRandomNumber = Math.floor(Math.random() * 8);
         const newFileName = `ezclap${newRandomNumber}.mp3`;
         const audio = document.getElementById("audio");
@@ -131,8 +145,12 @@
         audio.play();
     });
 
+    const coffee = document.getElementById("coffee");
+    coffee.addEventListener("mousedown", e => {
+        e.stopPropagation();
+    });
     const toggle = document.getElementById("toggle");
-    toggle.addEventListener("click", e => {
+    toggle.addEventListener("mousedown", e => {
         e.stopPropagation();
         e.preventDefault();
         const elements = Array.from(document.getElementsByClassName("can-toggle"));
